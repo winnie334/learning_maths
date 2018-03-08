@@ -1,11 +1,13 @@
-let nn, training_data, size;
-let canvas_size = 600;
-let selected = [-1, -1];
+let nn, training_data, size, canvas_size, selected;
 
 function setup() {
-  size = 10;
+  size = 30;
+  canvas_size = 600;
+  selected = [-1, -1];
   createCanvas(canvas_size, canvas_size);
-  nn = new NeuralNetwork(2, 2, 1);
+  noStroke();
+  colorMode(HSB, size);
+  nn = new NeuralNetwork(2, 2, 1, 0.1);
   training_data = generateTrainingData(size);
   console.log(training_data)
 }
@@ -37,8 +39,7 @@ function draw() {
   for (var i = 0; i < size; i++) {
     for (var j = 0; j < size; j++) {
       output = 2 * size * nn.predict([i, j]);
-      //text(str(output), i * columns, j * rows, [columns], [rows])
-      fill(map(output, 0, size * 2, 0, 255));
+      fill(map(output, 0, size * 2, 0, size), 50, 50);
       rect(i * columns, j * rows, columns, rows);
     }
   }
@@ -52,7 +53,7 @@ function displayInfo() {
     document.getElementById("output").innerHTML = selected_output;
   } else {
     document.getElementById("square").innerHTML = "No square selected!";
-    document.getElementById("output").innerHTML = "";
+    document.getElementById("output").innerHTML = ".";
   }
 }
 
