@@ -1,10 +1,13 @@
-let nn, training_data, size, canvas_size, selected;
+let nn, training_data, size, canvas_size, selected, slider;
 
 function setup() {
-  size = 30;
+  size = 20;
   canvas_size = 600;
   selected = [-1, -1];
   createCanvas(canvas_size, canvas_size);
+  slider = createSlider(0, 7, 3);
+  slider.position(150, 15);
+  slider.style('width', 100 + 'px');
   noStroke();
   colorMode(HSB, size);
   nn = new NeuralNetwork(2, 2, 1, 0.1);
@@ -29,7 +32,7 @@ function generateTrainingData(number) {
 function draw() {
   background(255);
   displayInfo();
-  for (var i = 0; i < 1000; i++) {
+  for (var i = 0; i < Math.pow(10, slider.value()); i++) {
     train_object = random(training_data);
     nn.train(train_object.inputs, train_object.outputs);
   }
@@ -40,12 +43,14 @@ function draw() {
     for (var j = 0; j < size; j++) {
       output = 2 * size * nn.predict([i, j]);
       fill(map(output, 0, size * 2, 0, size), 50, 50);
+      //fill(Math.abs(i + j - output), 50, 50);
       rect(i * columns, j * rows, columns, rows);
     }
   }
 }
 
 function displayInfo() {
+  document.getElementById("speed").innerHTML = slider.value();
   if (selected[0] != -1 && selected[1] != -1) {
     selected_output = 2 * size * nn.predict([selected[0], selected[1]]);
     var s = selected[0] + " + " + selected[1] + " =";
