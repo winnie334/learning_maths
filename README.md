@@ -6,7 +6,8 @@ It will display its results using HSB, which hopefully results in a nice rainbow
 ![Like this!](https://imgur.com/EIl1xbr.png)
 
 ## How to use
-Download/clone this repository and open *index.html*. It should work right away.
+It is possible to [run this script in your browser](https://winnie334.github.io/learning_maths/). 
+Alternatively, download or clone this repository and open *index.html*. It should work right away.
 
 There's a slider on top of the screen to adjust the learning speed. Higher speed = faster training = less updates per second = increased odds of computer exploding.
 
